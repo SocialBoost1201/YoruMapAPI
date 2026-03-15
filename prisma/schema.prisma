@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum ShopCategory {
+  cabaret
+  girlsBar
+  snack
+  lounge
+  other
+}
+
+enum ModerationStatus {
+  approved
+  pending
+  rejected
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+  shop         Shop?
+
+  @@map("users")
+}
+
+model Shop {
+  id               String       @id @default(uuid())
+  userId           String       @unique @map("user_id")
+  name             String
+  category         ShopCategory
+  prefecture       String
+  city             String
+  area             String
+  address          String
+  phone            String
+  businessHoursText String      @map("business_hours_text")
+  priceMin         Int?         @map("price_min")
+  priceMax         Int?         @map("price_max")
+  logoPath         String?      @map("logo_path")
+  snsUrl           String?      @map("sns_url")
+  description      String?
+  regularHoliday   String?      @map("regular_holiday")
+  paymentMethods   String?      @map("payment_methods")
+  createdAt        DateTime     @default(now()) @map("created_at")
+  updatedAt        DateTime     @updatedAt @map("updated_at")
+
+  user  User   @relation(fields: [userId], references: [id])
+  girls Girl[]
+
+  @@map("shops")
+}
+
+model Girl {
+  id               String           @id @default(uuid())
+  shopId           String           @map("shop_id")
+  name             String
+  age              Int?
+  shortBio         String?          @map("short_bio")
+  rankName         String?          @map("rank_name")
+  moderationStatus ModerationStatus @default(approved) @map("moderation_status")
+  createdAt        DateTime         @default(now()) @map("created_at")
+  updatedAt        DateTime         @updatedAt @map("updated_at")
+
+  shop Shop @relation(fields: [shopId], references: [id])
+
+  @@map("girls")
+}
