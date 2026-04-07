@@ -1,0 +1,73 @@
+# Secrets / env
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+*.mobileprovision
+
+# Package / build
+node_modules
+.next
+out
+dist
+build
+coverage
+.cache
+.turbo
+.vercel
+.parcel-cache
+
+# Logs / reports
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+playwright-report
+test-results
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+
+# Local databases / temp
+*.sqlite
+*.sqlite3
+*.db
+tmp
+temp
+.tmp
+
+# Python
+__pycache__
+*.pyc
+.venv
+venv
+
+# Misc generated
+*.tsbuildinfo
+
+# Supabase / local infra temp
+supabase/.temp
+supabase/.branches
+
+# Large archives / binaries
+*.zip
+*.tar
+*.gz
+*.rar
+*.7z
+*.dmg
+
+# Cursor / agent local runtime noise
+.cursor/cache
+.cursor/backups
+
+# Optional: ignore local docs/assets only if they are not source of truth
+# Uncomment only if needed
+# docs/tmp
+# docs/archive
